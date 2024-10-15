@@ -2,6 +2,9 @@
   "expo": {
     "name": "todo-wmdb-rn-app",
     "slug": "todo-wmdb-rn-app",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
