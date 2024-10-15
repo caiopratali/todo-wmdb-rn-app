@@ -1,9 +1,14 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
-export const Container = styled.View`
+interface ContainerProps {
+    paddingTop?: number;
+    paddingBottom?: number;
+}
+
+export const Container = styled.View<ContainerProps>`
     flex: 1;
-    align-items: center;
-    justify-content: center;
+    padding-top: ${({ paddingTop }) => paddingTop}px;
+    padding-bottom: ${({ paddingBottom }) => paddingBottom}px;
     background-color: ${({ theme }) => theme.colors.primary_900};
 `;
 

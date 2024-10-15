@@ -9,6 +9,7 @@ import { Home } from './src/screens/Home';
 import { theme } from './src/global/theme';
 import { Loading } from './src/components/Loading';
 import { ThemeProvider } from 'styled-components/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -18,11 +19,13 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {
-        fontsLoaded 
-        ? <Home /> 
-        : <Loading />
-      }
+      <SafeAreaProvider>
+        {
+          fontsLoaded 
+          ? <Home /> 
+          : <Loading />
+        }
+      </SafeAreaProvider>
     </ThemeProvider>
   );
 }
