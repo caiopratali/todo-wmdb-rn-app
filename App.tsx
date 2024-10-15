@@ -6,7 +6,9 @@ import {
 } from "@expo-google-fonts/roboto";
 
 import { Home } from './src/screens/Home';
+import { theme } from './src/global/theme';
 import { Loading } from './src/components/Loading';
+import { ThemeProvider } from 'styled-components/native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -15,8 +17,12 @@ export default function App() {
   });
 
   return (
-    fontsLoaded 
-    ? <Home /> 
-    : <Loading />
+    <ThemeProvider theme={theme}>
+      {
+        fontsLoaded 
+        ? <Home /> 
+        : <Loading />
+      }
+    </ThemeProvider>
   );
 }
