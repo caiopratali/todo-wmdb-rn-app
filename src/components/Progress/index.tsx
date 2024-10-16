@@ -1,10 +1,14 @@
-import { Container, Description, Title } from './styles'
+import { CircleChart } from '../CircleChart'
+import { Container, Content, Description, Title } from './styles'
 
 export function Progress() {
   return (
     <Container>
-        <Title>Progresso</Title>
-        <Description>3/5 Tarefas Concluidas</Description>
+        <Content>
+          <Title>Progresso</Title>
+          <Description>3/5 Tarefas Concluidas</Description>
+        </Content>
+        <CircleChart percentage={60} />
     </Container>
   )
 }
