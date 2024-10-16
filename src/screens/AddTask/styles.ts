@@ -1,14 +1,14 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    background-color: ${({ theme }) => theme.colors.primary_900};
-`;
+interface ContainerProps {
+    paddingTop?: number;
+    paddingBottom?: number;
+}
 
-export const Title = styled.Text`
-    font-size: 20px;
-    font-family: ${({ theme }) => theme.fonts.bold};
-    color: ${({ theme }) => theme.colors.primary_100};
+export const Container = styled.View<ContainerProps>`
+    flex: 1;
+    padding: 20px;
+    padding-top: ${({ paddingTop }) => paddingTop}px;
+    padding-bottom: ${({ paddingBottom }) => paddingBottom}px;
+    background-color: ${({ theme }) => theme.colors.primary_900};
 `;
