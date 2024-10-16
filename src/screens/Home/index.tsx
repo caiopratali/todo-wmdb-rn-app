@@ -3,6 +3,7 @@ import * as Styles from './styles'
 import { Progress } from '../../components/Progress';
 import { UseSafeArea } from '../../hooks/UseSafeArea';
 import { Accordion } from '../../components/Accordion';
+import { AddButton } from '../../components/AddButton';
 
 export function Home() {
 
@@ -13,6 +14,8 @@ export function Home() {
         <Progress />
 
         <Accordion />
+
+        <AddButton />
     </Styles.Container>
   )
 }
