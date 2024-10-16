@@ -14,5 +14,6 @@ export const Container = styled.View<ContainerProps>`
 `;
 
 export const Form = styled.View`
+    flex: 1;
     margin-top: 20px;
 `;
