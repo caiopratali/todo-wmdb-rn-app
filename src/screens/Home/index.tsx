@@ -10,8 +10,6 @@ export function Home() {
 
   return (
     <Styles.Container paddingTop={top} paddingBottom={bottom}>
-        <Styles.Title>Bem-vindo</Styles.Title>
-
         <Progress />
 
         <Accordion />

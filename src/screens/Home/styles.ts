@@ -12,9 +12,3 @@ export const Container = styled.View<ContainerProps>`
     padding-bottom: ${({ paddingBottom }) => paddingBottom}px;
     background-color: ${({ theme }) => theme.colors.primary_900};
 `;
-
-export const Title = styled.Text`
-    font-size: 24px;
-    font-family: ${({ theme}) => theme.fonts.bold};
-    color: ${({ theme }) => theme.colors.primary_100};
-`;
