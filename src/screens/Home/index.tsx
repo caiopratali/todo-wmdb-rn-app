@@ -1,6 +1,8 @@
 import * as Styles from './styles'
-import { UseSafeArea } from '../../hooks/UseSafeArea';
+
 import { Progress } from '../../components/Progress';
+import { UseSafeArea } from '../../hooks/UseSafeArea';
+import { Accordion } from '../../components/Accordion';
 
 export function Home() {
 
@@ -11,6 +13,8 @@ export function Home() {
         <Styles.Title>Bem-vindo</Styles.Title>
 
         <Progress />
+
+        <Accordion />
     </Styles.Container>
   )
 }
