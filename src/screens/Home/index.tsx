@@ -1,5 +1,6 @@
 import * as Styles from './styles'
 import { UseSafeArea } from '../../hooks/UseSafeArea';
+import { Progress } from '../../components/Progress';
 
 export function Home() {
 
@@ -7,7 +8,9 @@ export function Home() {
 
   return (
     <Styles.Container paddingTop={top} paddingBottom={bottom}>
-        <Styles.Title>Junho</Styles.Title>
+        <Styles.Title>Bem-vindo</Styles.Title>
+
+        <Progress />
     </Styles.Container>
   )
 }
