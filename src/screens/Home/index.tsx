@@ -5,9 +5,13 @@ import { UseSafeArea } from '../../hooks/UseSafeArea';
 import { Accordion } from '../../components/Accordion';
 import { AddButton } from '../../components/AddButton';
 
-export function Home() {
+export function Home({ navigation }) {
 
   const { top, bottom } = UseSafeArea();
+
+  const handleAddTask = () => {
+    navigation.navigate('AddTask');
+  }
 
   return (
     <Styles.Container paddingTop={top} paddingBottom={bottom}>
@@ -15,7 +19,7 @@ export function Home() {
 
         <Accordion />
 
-        <AddButton />
+        <AddButton onPress={handleAddTask}/>
     </Styles.Container>
   )
 }

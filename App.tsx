@@ -5,11 +5,11 @@ import {
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 
-import { Home } from './src/screens/Home';
 import { theme } from './src/global/theme';
 import { Loading } from './src/components/Loading';
 import { ThemeProvider } from 'styled-components/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,7 +22,7 @@ export default function App() {
       <SafeAreaProvider>
         {
           fontsLoaded 
-          ? <Home /> 
+          ? <Routes /> 
           : <Loading />
         }
       </SafeAreaProvider>

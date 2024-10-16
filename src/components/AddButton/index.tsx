@@ -1,8 +1,12 @@
 import { Container, Icon } from './styles'
 
-export function AddButton() {
+interface AddButtonProps {
+  onPress: () => void;
+}
+
+export function AddButton({ onPress}: AddButtonProps) {
   return (
-    <Container>
+    <Container onPress={onPress}>
         <Icon />
     </Container>
   )
