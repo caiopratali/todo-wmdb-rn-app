@@ -12,3 +12,7 @@ export const Container = styled.View<ContainerProps>`
     padding-bottom: ${({ paddingBottom }) => paddingBottom}px;
     background-color: ${({ theme }) => theme.colors.primary_900};
 `;
+
+export const Form = styled.View`
+    margin-top: 20px;
+`;
