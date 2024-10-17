@@ -10,6 +10,7 @@ import { Loading } from './src/components/Loading';
 import { ThemeProvider } from 'styled-components/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Routes } from './src/routes';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,6 +21,11 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <SafeAreaProvider>
+        <StatusBar 
+          barStyle="light-content" 
+          backgroundColor={theme.colors.primary_900} 
+        />
+
         {
           fontsLoaded 
           ? <Routes /> 
