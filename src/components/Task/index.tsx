@@ -1,23 +1,22 @@
-import { useState } from 'react';
-
 import { Checkbox, Container, Icon, Title } from './styles'
+import { updateTask } from '../../services/updateTask';
 
 interface TaskProps {
+    id: string;
     name: string;
+    isCompleted: boolean;
 }
 
-export function Task({ name }: TaskProps) {
-
-  const [completed, setCompleted] = useState(false);
+export function Task({ id, name, isCompleted }: TaskProps) {
 
   const handleCompleted = () => {
-    setCompleted(prev => !prev);
+    updateTask(id, !isCompleted);
   }
 
   return (
     <Container onPress={handleCompleted}>
         <Checkbox>
-            { completed && <Icon /> }
+            { isCompleted && <Icon /> }
         </Checkbox>
 
         <Title>{name}</Title>

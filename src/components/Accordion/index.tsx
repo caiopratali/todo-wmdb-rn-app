@@ -1,33 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
 import { Task } from '../Task'
 import { Container, Content, Item, Trigger, TriggerText } from './styles'
-import { getTasksByStatus } from '../../services/getTasksByStatus';
-import { TaskModel } from '../../db/model/Task';
 
-export function Accordion() {
+interface Props {
+  tasks: {
+      id: string;
+      name: string;
+      done: boolean;
+  }[]
+};
+
+export function Accordion({ tasks }: Props) {
 
   const [session, setSession] = useState(0);
-  const [doneTasks, setDoneTasks] = useState([]);
-  const [inProgressTasks, setInProgressTasks] = useState([]);
 
   const handleSession = (index: number) => {
     setSession(index);
   }
-
-  const getInProgressTasks = async () => {
-    const tasks = await getTasksByStatus(false);
-    setInProgressTasks(tasks);
-  }
-
-  const getDoneTasks = async () => {
-    const tasks = await getTasksByStatus(true);
-    setDoneTasks(tasks);
-  }
-
-  useEffect(() => {
-    getInProgressTasks();
-    getDoneTasks();
-  }, [])
 
   return (
     <Container>
@@ -39,8 +29,14 @@ export function Accordion() {
           session === 0 &&
           <Content>
             {
-              inProgressTasks.map((task) => (
-                <Task key={task.id} name={task.name} />
+              tasks.map((task) => (
+                !task.done &&
+                <Task 
+                  key={task.id} 
+                  id={task.id} 
+                  name={task.name} 
+                  isCompleted={task.done}
+                />
               ))
             }
           </Content>
@@ -55,8 +51,14 @@ export function Accordion() {
           session === 1 &&
           <Content>
             {
-              doneTasks.map((task) => (
-                <Task key={task.id} name={task.name} />
+              tasks.map((task) => (
+                task.done &&
+                <Task 
+                  key={task.id} 
+                  id={task.id} 
+                  name={task.name} 
+                  isCompleted={task.done}
+                />
               ))
             }
           </Content>

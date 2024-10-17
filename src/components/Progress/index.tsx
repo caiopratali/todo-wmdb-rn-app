@@ -1,14 +1,30 @@
 import { CircleChart } from '../CircleChart'
 import { Container, Content, Description, Title } from './styles'
 
-export function Progress() {
+interface Props {
+    tasks: {
+        id: string;
+        name: string;
+        done: boolean;
+    }[]
+};
+
+export function Progress({ tasks }: Props) {
+
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(task => task.done).length;
+  const percentage = (completedTasks / totalTasks) * 100;
+
   return (
     <Container>
         <Content>
           <Title>Progresso</Title>
-          <Description>3/5 Tarefas Concluidas</Description>
+          <Description>
+            {`${completedTasks}/${totalTasks} `} 
+            Tarefas Concluidas
+          </Description>
         </Content>
-        <CircleChart percentage={60} />
+        <CircleChart percentage={percentage} />
     </Container>
   )
 }
