@@ -13,7 +13,7 @@ export function Progress({ tasks }: Props) {
 
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter(task => task.done).length;
-  const percentage = (completedTasks / totalTasks) * 100;
+  const percentage = ((completedTasks / totalTasks) * 100).toFixed();
 
   return (
     <Container>
