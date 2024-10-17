@@ -8,12 +8,15 @@ import { Header } from '../../components/Header'
 import { Button } from '../../components/Button';
 import { UseSafeArea } from '../../hooks/UseSafeArea';
 import { Error } from '../../components/Input/styles';
+import { createTask } from '../../services/createTask';
 
-const schema = z.object({
+const taskSchema = z.object({
   name: z.string().min(1, { message: 'Campo obrigatório' }),
 });
 
-export function AddTask() {
+type taskFormData = z.infer<typeof taskSchema>;
+
+export function AddTask({ navigation }) {
 
   const { top, bottom } = UseSafeArea();
 
@@ -21,15 +24,18 @@ export function AddTask() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-    },
+  } = useForm<taskFormData>({
+    resolver: zodResolver(taskSchema)
   })
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data: taskFormData) => {
+    try {
+      await createTask(data.name);
+
+      navigation.navigate('Home');
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

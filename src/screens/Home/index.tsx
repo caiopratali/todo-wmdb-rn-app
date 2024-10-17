@@ -1,5 +1,6 @@
-import * as Styles from './styles'
+import { useEffect } from 'react';
 
+import { Container } from './styles'
 import { Progress } from '../../components/Progress';
 import { UseSafeArea } from '../../hooks/UseSafeArea';
 import { Accordion } from '../../components/Accordion';
@@ -14,12 +15,12 @@ export function Home({ navigation }) {
   }
 
   return (
-    <Styles.Container paddingTop={top} paddingBottom={bottom}>
+    <Container paddingTop={top} paddingBottom={bottom}>
         <Progress />
 
         <Accordion />
 
         <AddButton onPress={handleAddTask}/>
-    </Styles.Container>
+    </Container>
   )
 }

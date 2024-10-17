@@ -1225,7 +1225,11 @@ PODS:
     - Yoga
   - RNSVG (15.2.0):
     - React-Core
+  - simdjson (3.1.0-wmelon1)
   - SocketRocket (0.7.0)
+  - WatermelonDB (0.27.1):
+    - React
+    - simdjson
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1294,6 +1298,8 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - "simdjson (from `../node_modules/@nozbe/simdjson`)"
+  - "WatermelonDB (from `../node_modules/@nozbe/watermelondb`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1428,6 +1434,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  simdjson:
+    :path: "../node_modules/@nozbe/simdjson"
+  WatermelonDB:
+    :path: "../node_modules/@nozbe/watermelondb"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1495,9 +1505,11 @@ SPEC CHECKSUMS:
   ReactCommon: f7da14a8827b72704169a48c929bcde802698361
   RNScreens: b32a9ff15bea7fcdbe5dff6477bc503f792b1208
   RNSVG: 43b64ed39c14ce830d840903774154ca0c1f27ec
+  simdjson: e6bfae9ce4bcdc80452d388d593816f1ca2106f3
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  WatermelonDB: 842d22ba555425aa9f3ce551239a001200c539bc
   Yoga: 950bbfd7e6f04790fdb51149ed51df41f329fcc8
 
-PODFILE CHECKSUM: 8f35a86b869bd4cefd0b6112f7f51e8ee66ec456
+PODFILE CHECKSUM: e4cbd7efae6667701e9393e9cba7cc9a24993459
 
 COCOAPODS: 1.15.2

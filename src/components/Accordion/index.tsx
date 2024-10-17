@@ -1,53 +1,67 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Task } from '../Task'
 import { Container, Content, Item, Trigger, TriggerText } from './styles'
-
-const sessions = [
-  {
-    title: 'Em andamento',
-    tasks: [
-      { name: 'Task 3' },
-      { name: 'Task 4' }
-    ]
-  },
-  {
-    title: 'Concluídas',
-    tasks: [
-      { name: 'Task 1' },
-      { name: 'Task 2' },
-    ]
-  }
-]
+import { getTasksByStatus } from '../../services/getTasksByStatus';
+import { TaskModel } from '../../db/model/Task';
 
 export function Accordion() {
 
   const [session, setSession] = useState(0);
+  const [doneTasks, setDoneTasks] = useState([]);
+  const [inProgressTasks, setInProgressTasks] = useState([]);
 
   const handleSession = (index: number) => {
     setSession(index);
   }
 
+  const getInProgressTasks = async () => {
+    const tasks = await getTasksByStatus(false);
+    setInProgressTasks(tasks);
+  }
+
+  const getDoneTasks = async () => {
+    const tasks = await getTasksByStatus(true);
+    setDoneTasks(tasks);
+  }
+
+  useEffect(() => {
+    getInProgressTasks();
+    getDoneTasks();
+  }, [])
+
   return (
     <Container>
-      {
-        sessions.map((item, index) => (
-          <Item key={index}>
-            <Trigger onPress={() => handleSession(index)}>
-              <TriggerText>{item.title}</TriggerText>
-            </Trigger>
+      <Item>
+        <Trigger onPress={() => handleSession(0)}>
+          <TriggerText>Em andamento</TriggerText>
+        </Trigger>
+        {
+          session === 0 &&
+          <Content>
             {
-              session === index &&
-              <Content>
-                {
-                  item.tasks.map((task, index) => (
-                    <Task key={index} name={task.name} />
-                  ))
-                }
-              </Content>
+              inProgressTasks.map((task) => (
+                <Task key={task.id} name={task.name} />
+              ))
             }
-          </Item>
-        ))
-      }
+          </Content>
+        }
+      </Item>
+
+      <Item>
+        <Trigger onPress={() => handleSession(1)}>
+          <TriggerText>Concluidas</TriggerText>
+        </Trigger>
+        {
+          session === 1 &&
+          <Content>
+            {
+              doneTasks.map((task) => (
+                <Task key={task.id} name={task.name} />
+              ))
+            }
+          </Content>
+        }
+      </Item>
     </Container>
   )
 }
