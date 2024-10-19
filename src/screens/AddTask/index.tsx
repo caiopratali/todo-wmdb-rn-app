@@ -1,6 +1,8 @@
 import { z } from 'zod';
+import { useTranslation } from 'react-i18next';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { Container, Form } from './styles'
 import { Input } from '../../components/Input';
@@ -9,7 +11,6 @@ import { Button } from '../../components/Button';
 import { UseSafeArea } from '../../hooks/UseSafeArea';
 import { Error } from '../../components/Input/styles';
 import { createTask } from '../../services/createTask';
-import { useTranslation } from 'react-i18next';
 
 const taskSchema = z.object({
   name: z.string().min(1, { message: 'Campo obrigatório' }),
@@ -18,6 +19,8 @@ const taskSchema = z.object({
 type taskFormData = z.infer<typeof taskSchema>;
 
 export function AddTask({ navigation }) {
+
+  const queryClient = useQueryClient();
 
   const { t } = useTranslation();
   const { top, bottom } = UseSafeArea();
@@ -30,15 +33,16 @@ export function AddTask({ navigation }) {
     resolver: zodResolver(taskSchema)
   })
 
-  const onSubmit = async (data: taskFormData) => {
-    try {
-      await createTask(data.name);
+  const { mutate } = useMutation({
+    mutationFn: createTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
 
       navigation.navigate('Home');
-    } catch (error) {
-      console.log(error)
     }
-  }
+  });
+
+  const onSubmit = (data: taskFormData) => mutate(data.name);
 
   return (
     <Container paddingTop={top} paddingBottom={bottom}>

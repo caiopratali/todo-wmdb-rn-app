@@ -1,4 +1,6 @@
-import { Checkbox, Container, Icon, Title } from './styles'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { Checkbox, Container, Icon, Title } from './styles';
 import { updateTask } from '../../services/updateTask';
 
 interface TaskProps {
@@ -9,8 +11,29 @@ interface TaskProps {
 
 export function Task({ id, name, isCompleted }: TaskProps) {
 
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: updateTask,
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+
+      queryClient.setQueryData(['tasks'], (oldTasks: any) => {
+        const updatedTasks = oldTasks.map((task) => {
+          if (task.id === id) {
+            return { ...task, done: variables.isCompleted }
+          }
+
+          return task;
+        })
+
+        return updatedTasks;
+      });
+    }
+  });
+
   const handleCompleted = () => {
-    updateTask(id, !isCompleted);
+    mutate({ id, isCompleted: !isCompleted });
   }
 
   return (

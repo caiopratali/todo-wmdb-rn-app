@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { Container } from './styles'
+import { Loading } from '../../components/Loading';
 import { getTasks } from '../../services/getTasks';
 import { Progress } from '../../components/Progress';
 import { UseSafeArea } from '../../hooks/UseSafeArea';
@@ -9,27 +10,23 @@ import { AddButton } from '../../components/AddButton';
 
 export function Home({ navigation }) {
 
-  const [tasks, setTasks] = useState([]);
-
   const { top, bottom } = UseSafeArea();
 
   const handleAddTask = () => {
     navigation.navigate('AddTask');
   }
 
-  useEffect(() => {
-    (async () => {
-      const response = await getTasks();
+  const { data, isLoading } = useQuery({ queryKey: ['tasks'], queryFn: getTasks })
 
-      setTasks(response);
-    })()
-  }, [tasks]);
+  if (isLoading) {
+    return <Loading />
+  } 
 
   return (
     <Container paddingTop={top} paddingBottom={bottom}>
-        <Progress tasks={tasks} />
+        <Progress tasks={data} />
 
-        <Accordion tasks={tasks} />
+        <Accordion tasks={data} />
 
         <AddButton onPress={handleAddTask}/>
     </Container>
