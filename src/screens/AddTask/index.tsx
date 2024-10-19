@@ -9,6 +9,7 @@ import { Button } from '../../components/Button';
 import { UseSafeArea } from '../../hooks/UseSafeArea';
 import { Error } from '../../components/Input/styles';
 import { createTask } from '../../services/createTask';
+import { useTranslation } from 'react-i18next';
 
 const taskSchema = z.object({
   name: z.string().min(1, { message: 'Campo obrigatório' }),
@@ -18,6 +19,7 @@ type taskFormData = z.infer<typeof taskSchema>;
 
 export function AddTask({ navigation }) {
 
+  const { t } = useTranslation();
   const { top, bottom } = UseSafeArea();
 
   const {
@@ -40,7 +42,7 @@ export function AddTask({ navigation }) {
 
   return (
     <Container paddingTop={top} paddingBottom={bottom}>
-        <Header title='Criar' />
+        <Header title={t("create")} />
 
         <Form>
           <Controller
@@ -49,14 +51,16 @@ export function AddTask({ navigation }) {
             render={({ field: { onChange, value } }) => (
               <Input 
                 value={value}
+                label={t("name")}
                 onChangeText={onChange} 
+                placeholder={t("enterTheNameTask")}
               />
             )}
           />
           { errors.name && <Error>{errors.name.message}</Error> }
         </Form>
 
-        <Button title='Adicionar' onPress={handleSubmit(onSubmit)} />
+        <Button title={t("add")} onPress={handleSubmit(onSubmit)} />
     </Container>
   )
 }

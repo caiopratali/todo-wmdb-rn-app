@@ -1,16 +1,18 @@
+import './src/locales/i18n';
+
 import React from 'react';
+import { StatusBar } from 'react-native';
 import {
   useFonts,
   Roboto_400Regular,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 
+import { Routes } from './src/routes';
 import { theme } from './src/global/theme';
 import { Loading } from './src/components/Loading';
 import { ThemeProvider } from 'styled-components/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Routes } from './src/routes';
-import { StatusBar } from 'react-native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({

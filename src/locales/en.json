@@ -1,0 +1,10 @@
+{
+  "progress": "Progress",
+  "completedTasks": "Completed tasks",
+  "inProgress": "In progress",
+  "completed": "Completed",
+  "create": "Create",
+  "name": "Name",
+  "add": "Add",
+  "enterTheNameTask": "Enter the name of the task"
+}

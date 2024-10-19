@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Task } from '../Task'
 import { Container, Content, Item, Trigger, TriggerText } from './styles'
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   tasks: {
@@ -13,6 +14,8 @@ interface Props {
 
 export function Accordion({ tasks }: Props) {
 
+  const { t } = useTranslation();
+
   const [session, setSession] = useState(0);
 
   const handleSession = (index: number) => {
@@ -23,7 +26,7 @@ export function Accordion({ tasks }: Props) {
     <Container>
       <Item>
         <Trigger onPress={() => handleSession(0)}>
-          <TriggerText>Em andamento</TriggerText>
+          <TriggerText>{t("inProgress")}</TriggerText>
         </Trigger>
         {
           session === 0 &&
@@ -45,7 +48,7 @@ export function Accordion({ tasks }: Props) {
 
       <Item>
         <Trigger onPress={() => handleSession(1)}>
-          <TriggerText>Concluidas</TriggerText>
+          <TriggerText>{t("completed")}</TriggerText>
         </Trigger>
         {
           session === 1 &&

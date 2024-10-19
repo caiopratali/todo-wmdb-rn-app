@@ -3,9 +3,11 @@ import { TextInputProps } from 'react-native';
 
 import { Container, Label, TextInput } from './styles'
 
-interface InputProps extends TextInputProps {}
+interface InputProps extends TextInputProps {
+  label: string;
+}
 
-export function Input({  ...rest }: InputProps) {
+export function Input({  label, ...rest }: InputProps) {
     const [isFocused, setIsFocused] = useState(false);
   
     const handleInputFocus = () => {
@@ -18,10 +20,9 @@ export function Input({  ...rest }: InputProps) {
 
     return (
       <Container>
-          <Label>Nome</Label>
+          <Label>{label}</Label>
           <TextInput  
               {...rest}
-              placeholder='Digite o da tarefa' 
               isFocused={isFocused}
               onBlur={handleInputBlur}
               onFocus={handleInputFocus}
