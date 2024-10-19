@@ -14,6 +14,4 @@ export const updateTask = async ({ id, isCompleted }: Props) => {
         task.done = isCompleted;
       })
     })
-
-    return { ok: true}
 }
